@@ -1,0 +1,25 @@
+# .htaccess — Regras básicas de segurança e roteamento amigável para o Site Carros.
+
+Options -Indexes
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^api/anuncios/([0-9]+)/denuncia/?$ api/anuncios/denuncia.php?id=$1 [L,QSA]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^loja/([0-9]+)/([a-z0-9\-]+)/?$ loja.php?id=$1&slug=$2 [L,QSA]
+    RewriteRule ^loja/([0-9]+)/?$ loja.php?id=$1 [L,QSA]
+    RewriteRule ^loja/([a-z0-9\-]+)/?$ loja.php?slug=$1 [L,QSA]
+    RewriteRule ^anuncio/([0-9]+)/([a-z0-9\-]+)/?$ anuncios/ver.php?id=$1 [L,QSA]
+    RewriteRule ^anuncio/([0-9]+)/?$ anuncios/ver.php?id=$1 [L,QSA]
+</IfModule>
+
+# Bloqueia acesso direto a arquivos sensíveis
+<FilesMatch "\.(env|json|sql|tpl|yml|lock)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+<Files ".htaccess">
+    Order Allow,Deny
+    Deny from all
+</Files>

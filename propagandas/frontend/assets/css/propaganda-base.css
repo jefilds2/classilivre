@@ -1,0 +1,148 @@
+/* Estilos Base para Pop-ups de Propaganda */
+
+.propaganda-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+.propaganda-popup--hidden {
+    display: none !important;
+}
+
+.propaganda-popup__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+
+.propaganda-popup__container {
+    position: relative;
+    z-index: 1;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    width: 400px;
+    height: 533px;
+    aspect-ratio: 3 / 4;
+    overflow-y: auto;
+    animation: propagandaSlideUp 0.3s ease-out;
+    display: flex;
+    flex-direction: column;
+}
+
+@keyframes propagandaSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes propagandaSlideRight {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.propaganda-popup__close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: #f0f0f0;
+    border: 2px solid #ddd;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    z-index: 10;
+    transition: all 0.2s;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.propaganda-popup__close:hover {
+    background: #e74c3c;
+    border-color: #c0392b;
+    transform: scale(1.15) rotate(90deg);
+}
+
+.propaganda-popup__close:hover svg {
+    color: white;
+}
+
+.propaganda-popup__close svg {
+    width: 20px;
+    height: 20px;
+    color: #333;
+    transition: color 0.2s;
+}
+
+.propaganda-template {
+    display: none;
+    padding: 0;
+}
+
+.propaganda-template.active {
+    display: block;
+}
+
+/* Responsivo - Tablet (481px - 768px) */
+@media (max-width: 768px) {
+    .propaganda-popup {
+        padding: 10px;
+    }
+
+    .propaganda-popup__container {
+        width: 90vw;
+        max-width: 400px;
+        height: auto;
+        aspect-ratio: 3 / 4;
+        border-radius: 8px;
+    }
+
+    .propaganda-popup__close {
+        top: 8px;
+        right: 8px;
+        width: 28px;
+        height: 28px;
+    }
+
+    .propaganda-popup__close svg {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+/* Responsivo - Mobile (<480px) */
+@media (max-width: 480px) {
+    .propaganda-popup__container {
+        width: 95vw;
+        max-width: 350px;
+        height: auto;
+        aspect-ratio: 3 / 4;
+    }
+}

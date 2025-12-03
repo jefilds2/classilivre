@@ -1,0 +1,4 @@
+# Pasta de logs - ignorada no git
+logs/
+*.log
+*.tmp

@@ -1,0 +1,9 @@
+# Permitir acesso direto a imagens
+<FilesMatch "\.(jpg|jpeg|png|gif|webp)$">
+    Require all granted
+</FilesMatch>
+
+# Bloquear outros tipos de arquivo
+<FilesMatch "\.php$">
+    Require all denied
+</FilesMatch>

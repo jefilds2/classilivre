@@ -1,0 +1,30 @@
+# ===== DESABILITAR CACHE PARA PROPAGANDAS =====
+# Força o navegador a sempre buscar versão mais recente
+
+<FilesMatch "\.(php|js|css|html)$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+</FilesMatch>
+
+# ===== DESABILITAR CACHE PARA APIS =====
+<FilesMatch "\.php$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "-1"
+</FilesMatch>
+
+# ===== PERMITIR COMPRESSÃO GZIP =====
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>
+
+# ===== ADICIONAR ETAGS PARA VALIDAÇÃO =====
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault "access plus 0 seconds"
+</IfModule>
+
+# ===== REVALIDAR A CADA REQUISIÇÃO =====
+Header set Last-Modified "$(date)"
+Header set ETag "$(date +%s)"

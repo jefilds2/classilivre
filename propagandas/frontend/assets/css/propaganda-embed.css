@@ -1,0 +1,239 @@
+/**
+ * Propaganda EMBED - CSS Responsivo 16:9
+ * 
+ * Proporções:
+ * - Desktop (>768px): 700px × 394px
+ * - Tablet (481-768px): 90vw (max 600px) × auto
+ * - Mobile (<480px): 95vw (max 450px) × auto
+ * 
+ * aspect-ratio: 16/9 mantém proporção automaticamente
+ */
+
+/* ===== POPUP CONTAINER PRINCIPAL ===== */
+#propagandaPopupEmbed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+#propagandaPopupEmbed.propaganda-popup--hidden {
+    display: none !important;
+}
+
+/* ===== OVERLAY (FUNDO ESCURO) ===== */
+.propaganda-popup__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: rgba(0, 0, 0, 0.7);
+    cursor: pointer;
+}
+
+/* ===== CONTAINER DO CONTEÚDO - DESKTOP ===== */
+.propaganda-popup__container--embed {
+    position: relative;
+    width: 800px !important;
+    height: 450px !important;
+    aspect-ratio: 16 / 9 !important;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    z-index: 10;
+    animation: embedSlideUp 0.3s ease-out;
+    max-width: 100% !important;
+    flex-shrink: 0 !important;
+}
+
+/* ===== ANIMAÇÃO DE ENTRADA ===== */
+@keyframes embedSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== CONTEÚDO DO EMBED - SEM CONSTRAINTS ===== */
+#propagandaEmbedContent {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    overflow: hidden;
+}
+
+/* ===== LINKS E IMAGENS RESPONSIVAS ===== */
+#propagandaEmbedContent a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+#propagandaEmbedContent img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: none;
+}
+
+/* ===== IFRAMES - ENQUADRAM AUTOMATICAMENTE ===== */
+#propagandaEmbedContent iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: transparent;
+}
+
+/* ===== VÍDEOS - ENQUADRAM AUTOMATICAMENTE ===== */
+#propagandaEmbedContent video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: transparent;
+    object-fit: contain;
+}
+
+/* ===== BOTÃO FECHAR - SUPERIOR DIREITO ===== */
+.propaganda-popup__container--embed .propaganda-popup__close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 40px;
+    height: 40px;
+    background: rgba(0, 0, 0, 0.6);
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    transition: all 0.2s ease;
+    padding: 0;
+}
+
+.propaganda-popup__container--embed .propaganda-popup__close:hover {
+    background: rgba(0, 0, 0, 0.8);
+    border-color: white;
+    transform: scale(1.1);
+}
+
+.propaganda-popup__container--embed .propaganda-popup__close svg {
+    width: 20px;
+    height: 20px;
+    color: white;
+    stroke: white;
+    stroke-width: 2.5;
+}
+
+/* ===== RESPONSIVO - TABLET (481px - 768px) ===== */
+@media (max-width: 768px) {
+    #propagandaPopupEmbed {
+        align-items: flex-start;
+        padding: 16px;
+        padding-top: 20px;
+    }
+
+    .propaganda-popup__container--embed {
+        width: 90vw;
+        max-width: 600px;
+        height: auto;
+        aspect-ratio: 16 / 9;
+        max-height: 85vh;
+    }
+
+    #propagandaEmbedContent {
+        max-height: 80vh;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    #propagandaEmbedContent video {
+        object-fit: cover;
+    }
+}
+
+/* ===== RESPONSIVO - MOBILE (<480px) ===== */
+@media (max-width: 480px) {
+    #propagandaPopupEmbed {
+        padding: 12px;
+        padding-top: 16px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .propaganda-popup__container--embed {
+        width: 100%;
+        max-width: 100vw;
+        height: auto;
+        aspect-ratio: auto;
+        border-radius: 10px;
+        max-height: none;
+        margin: 0 auto;
+    }
+
+    #propagandaEmbedContent {
+        width: 100%;
+        height: auto;
+        max-height: none;
+        overflow: visible;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    #propagandaEmbedContent video,
+    #propagandaEmbedContent img {
+        width: 100% !important;
+        height: auto !important;
+        max-width: 100%;
+        object-fit: contain;
+        display: block;
+    }
+
+    #propagandaEmbedContent a {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    #propagandaEmbedContent a img {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    #propagandaEmbedContent iframe {
+        width: 100% !important;
+        height: auto !important;
+        min-height: 300px;
+    }
+
+    .propaganda-popup__container--embed .propaganda-popup__close {
+        width: 36px;
+        height: 36px;
+        top: 10px;
+        right: 10px;
+    }
+
+    .propaganda-popup__container--embed .propaganda-popup__close svg {
+        width: 18px;
+        height: 18px;
+    }
+}
