@@ -1,4 +1,4 @@
-<?php
+<? php
 // admin/solicitacoes_compra.php - Dashboard administrativo das solicitacoes de compra.
 
 declare(strict_types=1);
@@ -320,7 +320,8 @@ include __DIR__ . '/partials/admin_nav.php';
                 <form method="get" action="/admin/solicitacoes_compra.php" class="grid grid-cols-1 md:grid-cols-4 gap-3">
                     <div class="md:col-span-2">
                         <label for="q" class="block text-sm font-medium text-gray-700 mb-1">Buscar</label>
-                        <input id="q" name="q" value="<?= e($searchFilter); ?>" placeholder="titulo, marca, cidade, usuario..."
+                        <input id="q" name="q" value="<?= e($searchFilter); ?>"
+                            placeholder="titulo, marca, cidade, usuario..."
                             class="w-full border border-gray-300 rounded-lg px-3 py-2">
                     </div>
                     <div>
@@ -332,7 +333,8 @@ include __DIR__ . '/partials/admin_nav.php';
                         </select>
                     </div>
                     <div class="flex items-end">
-                        <button type="submit" class="w-full px-4 py-2 rounded-lg bg-amber-500 text-green-900 font-semibold hover:bg-amber-600">
+                        <button type="submit"
+                            class="w-full px-4 py-2 rounded-lg bg-amber-500 text-green-900 font-semibold hover:bg-amber-600">
                             Filtrar
                         </button>
                     </div>
@@ -382,7 +384,7 @@ include __DIR__ . '/partials/admin_nav.php';
                                 <td class="py-3 pr-3">
                                     <div class="font-semibold text-gray-800"><?= e((string) $request['title']); ?></div>
                                     <div class="text-xs text-gray-500 mt-1">
-                                        <?= e((string) ($request['brand'] ?? '')); ?> <?= e((string) ($request['model'] ?? '')); ?>
+                                        <?= e((string) ($request['brand'] ?? '')); ?>             <?= e((string) ($request['model'] ?? '')); ?>
                                         • <?= e(format_date((string) ($request['created_at'] ?? ''))); ?>
                                     </div>
                                 </td>
@@ -395,9 +397,11 @@ include __DIR__ . '/partials/admin_nav.php';
                                 </td>
                                 <td class="py-3 pr-3">
                                     <?php if ($isActive): ?>
-                                        <span class="inline-flex px-2 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700">Ativa</span>
+                                        <span
+                                            class="inline-flex px-2 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700">Ativa</span>
                                     <?php else: ?>
-                                        <span class="inline-flex px-2 py-1 rounded-full text-xs font-semibold bg-red-100 text-red-700">Encerrada</span>
+                                        <span
+                                            class="inline-flex px-2 py-1 rounded-full text-xs font-semibold bg-red-100 text-red-700">Encerrada</span>
                                     <?php endif; ?>
                                 </td>
                                 <td class="py-3 pr-3 text-gray-700">
@@ -416,8 +420,7 @@ include __DIR__ . '/partials/admin_nav.php';
                                     <?php if ($isActive): ?>
                                         <button type="button"
                                             class="inline-flex items-center px-3 py-1.5 rounded-lg bg-red-600 text-white font-semibold hover:bg-red-700"
-                                            data-admin-close-trigger
-                                            data-request-id="<?= (int) $request['id']; ?>"
+                                            data-admin-close-trigger data-request-id="<?= (int) $request['id']; ?>"
                                             data-request-title="<?= e((string) $request['title']); ?>">
                                             Excluir
                                         </button>
@@ -443,10 +446,9 @@ include __DIR__ . '/partials/admin_nav.php';
                             $query['q'] = $searchFilter;
                         }
                         ?>
-                        <a href="/admin/solicitacoes_compra.php?<?= e(http_build_query($query)); ?>"
-                            class="px-3 py-1.5 rounded-lg border <?= $p === $page
-                                ? 'bg-amber-500 text-green-900 border-amber-500'
-                                : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'; ?>">
+                        <a href="/admin/solicitacoes_compra.php?<?= e(http_build_query($query)); ?>" class="px-3 py-1.5 rounded-lg border <?= $p === $page
+                              ? 'bg-amber-500 text-green-900 border-amber-500'
+                              : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'; ?>">
                             <?= $p; ?>
                         </a>
                     <?php endfor; ?>
@@ -481,7 +483,8 @@ include __DIR__ . '/partials/admin_nav.php';
     <?php endif; ?>
 </section>
 
-<div id="adminCloseRequestModal" class="fixed inset-0 hidden bg-black/60 z-50 items-end sm:items-center justify-center px-4">
+<div id="adminCloseRequestModal"
+    class="fixed inset-0 hidden bg-black/60 z-50 items-end sm:items-center justify-center px-4">
     <div class="w-full max-w-xl bg-white rounded-t-2xl sm:rounded-2xl shadow-2xl p-5 sm:p-6">
         <div class="flex items-start justify-between gap-3">
             <h3 class="text-lg font-semibold text-gray-800">Excluir solicitacao (admin)</h3>
@@ -510,7 +513,8 @@ include __DIR__ . '/partials/admin_nav.php';
             </div>
 
             <div>
-                <label for="admin_reason_details" class="block text-sm font-semibold text-gray-700 mb-1">Detalhes (opcional)</label>
+                <label for="admin_reason_details" class="block text-sm font-semibold text-gray-700 mb-1">Detalhes
+                    (opcional)</label>
                 <textarea id="admin_reason_details" name="reason_details" rows="3"
                     class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-400"></textarea>
             </div>
@@ -520,8 +524,7 @@ include __DIR__ . '/partials/admin_nav.php';
                     class="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50">
                     Cancelar
                 </button>
-                <button type="submit"
-                    class="px-4 py-2 rounded-lg bg-red-600 text-white font-semibold hover:bg-red-700">
+                <button type="submit" class="px-4 py-2 rounded-lg bg-red-600 text-white font-semibold hover:bg-red-700">
                     Confirmar exclusao
                 </button>
             </div>
