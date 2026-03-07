@@ -29,6 +29,7 @@ if (!function_exists('flash_css_class')) {
 $homeUrl = '/';
 $searchPageUrl = '/anuncios/listar.php';
 $servicesPageUrl = file_exists(__DIR__ . '/../servicos/index.php') ? '/servicos/index.php' : '#';
+$purchaseRequestPageUrl = file_exists(__DIR__ . '/../solicitacoes-compra/index.php') ? '/solicitacoes-compra/' : '#';
 $advertisePageUrl = $user ? '/anuncios/criar.php' : '/login_system/login.php';
 $accountPageUrl = $user ? '/anuncios/meus.php' : '/login_system/login.php';
 $logoPath = '/assets/img/classilivre-logo.gif';
@@ -41,7 +42,7 @@ $storeMetricsScriptVersion = file_exists($storeMetricsScriptPath)
 $userCoinBalance = 0;
 if ($user) {
     try {
-        $userCoinBalance = function_exists('get_user_coin_balance') ? get_user_coin_balance((int)$user['id']) : 0;
+        $userCoinBalance = function_exists('get_user_coin_balance') ? get_user_coin_balance((int) $user['id']) : 0;
     } catch (Throwable $e) {
         $userCoinBalance = 0;
     }
@@ -56,16 +57,17 @@ $flashMessages = flash_get();
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="<?= e($pageDescription ?? 'Classi Livre Autos - Portal para compra e venda de veículos.'); ?>">
+    <meta name="description"
+        content="<?= e($pageDescription ?? 'Classi Livre Autos - Portal para compra e venda de veículos.'); ?>">
     <title><?= e($pageTitle); ?></title>
-    
+
     <!-- Meta Tags para Compartilhamento Social (Open Graph) -->
     <?php if (!empty($pageMetaTags) && is_array($pageMetaTags)): ?>
         <?php foreach ($pageMetaTags as $property => $content): ?>
             <meta property="<?= e($property); ?>" content="<?= e($content); ?>">
         <?php endforeach; ?>
     <?php endif; ?>
-    
+
     <link rel="icon" type="image/gif" href="/assets/img/classilivre-logo.png">
 
     <script src="https://cdn.botpress.cloud/webchat/v3.3/inject.js"></script>
@@ -81,8 +83,7 @@ $flashMessages = flash_get();
         href="/assets/css/main.css?v=<?= urlencode((string) filemtime(__DIR__ . '/../assets/css/main.css')); ?>">
     <script defer
         src="/assets/js/main.js?v=<?= urlencode((string) filemtime(__DIR__ . '/../assets/js/main.js')); ?>"></script>
-    <script defer
-        src="/assets/js/store-metrics.js?v=<?= urlencode($storeMetricsScriptVersion); ?>"></script>
+    <script defer src="/assets/js/store-metrics.js?v=<?= urlencode($storeMetricsScriptVersion); ?>"></script>
     <script defer
         src="/assets/js/compare-multiselect.js?v=<?= urlencode((string) filemtime(__DIR__ . '/../assets/js/compare-multiselect.js')); ?>"></script>
     <?php if ($user): ?>
@@ -167,50 +168,87 @@ $flashMessages = flash_get();
 
     <!-- Proteção da Logo: Bloqueia Right-Click e Download -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Selecionar todas as imagens de logo
             const logos = document.querySelectorAll('img[src*="classilivre-logo"]');
-            
+
             logos.forEach(logo => {
                 // Bloquear right-click
-                logo.addEventListener('contextmenu', function(e) {
+                logo.addEventListener('contextmenu', function (e) {
                     e.preventDefault();
                     return false;
                 });
-                
+
                 // Bloquear drag-and-drop
-                logo.addEventListener('dragstart', function(e) {
+                logo.addEventListener('dragstart', function (e) {
                     e.preventDefault();
                     return false;
                 });
-                
+
                 // Adicionar classe CSS para impedir seleção
                 logo.style.userSelect = 'none';
                 logo.style.webkitUserSelect = 'none';
                 logo.style.msUserSelect = 'none';
                 logo.style.mozUserSelect = 'none';
-                
+
                 // Impedir que seja arrastável
                 logo.draggable = false;
             });
         });
     </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7862106661041475"
+        crossorigin="anonymous"></script>
+    <meta name="google-adsense-account" content="ca-pub-7862106661041475">
+
+    <!-- Event snippet for Contato conversion page -->
+    <script>
+        gtag('event', 'conversion', { 'send_to': 'AW-10994153144/0o4cCKSBw-IDELjttfoo' });
+    </script>
+
+    <!-- Event snippet for Contato conversion page
+In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
+    <script>
+        function gtag_report_conversion(url) {
+            var callback = function () {
+                if (typeof (url) != 'undefined') {
+                    window.location = url;
+                }
+            };
+            gtag('event', 'conversion', {
+                'send_to': 'AW-10994153144/0o4cCKSBw-IDELjttfoo',
+                'event_callback': callback
+            });
+            return false;
+        }
+    </script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-10994153144">
+    </script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'AW-10994153144');
+    </script>
+
 </head>
 
 <body class="bg-gray-50 font-['Inter',sans-serif]">
     <!-- Facebook SDK for JavaScript -->
     <script>
-        window.fbAsyncInit = function() {
+        window.fbAsyncInit = function () {
             FB.init({
-                appId      : '1234567890', // Será substituído pelo app_id real
-                xfbml      : true,
-                version    : 'v21.0'
+                appId: '1234567890', // Será substituído pelo app_id real
+                xfbml: true,
+                version: 'v21.0'
             });
         };
     </script>
-    <script async defer crossorigin="anonymous" 
-        src="https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v21.0" nonce="AbCdEfGhIjKlMnOpQrStUvWxYz">
-    </script>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v21.0"
+        nonce="AbCdEfGhIjKlMnOpQrStUvWxYz">
+        </script>
 
     <header class="bg-white shadow-sm sticky top-0" style="z-index: 1000;">
         <div class="max-w-screen-2xl mx-auto px-4 py-4 flex justify-between items-center">
@@ -225,11 +263,15 @@ $flashMessages = flash_get();
                 </a>
                 <a href="<?= e($searchPageUrl); ?>"
                     class="nav-link bg-amber-500 text-green-900 px-4 py-2 rounded-lg font-semibold text-sm shadow-sm flex items-center">
-                    <i class="fas fa-search mr-2"></i> Buscar
+                    <i class="fas fa-search mr-2"></i> Buscar Veículos
                 </a>
                 <a href="<?= e($servicesPageUrl); ?>"
                     class="nav-link bg-amber-500 text-green-900 px-4 py-2 rounded-lg font-semibold text-sm shadow-sm flex items-center">
-                    <i class="fas fa-tools mr-2"></i> Catálogo de Serviços 
+                    <i class="fas fa-tools mr-2"></i> Catálogo de Empresas
+                </a>
+                <a href="<?= e($purchaseRequestPageUrl); ?>"
+                    class="nav-link bg-gradient-to-r from-red-600 to-orange-500 text-white px-4 py-2 rounded-lg font-semibold text-sm shadow-sm flex items-center">
+                    <i class="fas fa-bullseye mr-2"></i> Solicitação de compra
                 </a>
                 <a href="<?= e($advertisePageUrl); ?>"
                     class="nav-link bg-amber-500 text-green-900 px-4 py-2 rounded-lg font-semibold text-sm shadow-sm flex items-center">
@@ -259,10 +301,13 @@ $flashMessages = flash_get();
                                 <div class="mt-2 font-semibold text-sm">👤 <?= e($user['name']); ?></div>
                                 <div class="text-xs text-green-200 mt-2 flex items-center gap-2 flex-wrap">
                                     <span class="flex items-center gap-1">📧 <?= e($user['email']); ?></span>
-                                    <span class="inline-flex items-center gap-1 bg-white bg-opacity-40 rounded px-3 py-1 font-semibold text-green-900">💰 <?= (int)$userCoinBalance; ?> moedas</span>
+                                    <span
+                                        class="inline-flex items-center gap-1 bg-white bg-opacity-40 rounded px-3 py-1 font-semibold text-green-900">💰
+                                        <?= (int) $userCoinBalance; ?> moedas</span>
                                 </div>
                                 <?php if (!empty($user['is_admin'])): ?>
-                                    <div class="mt-1.5 inline-block bg-red-500 text-white px-1.5 py-0.5 rounded text-xs font-bold">
+                                    <div
+                                        class="mt-1.5 inline-block bg-red-500 text-white px-1.5 py-0.5 rounded text-xs font-bold">
                                         🔑 ADMINISTRADOR
                                     </div>
                                 <?php endif; ?>
@@ -286,6 +331,10 @@ $flashMessages = flash_get();
                             <a href="/premium/minhas_buscas_salvas.php"
                                 class="flex items-center text-gray-700 px-4 py-3 hover:bg-gray-50 text-sm border-b">
                                 <i class="fas fa-bookmark mr-2 text-amber-500"></i> Minhas Buscas Salvas
+                            </a>
+                            <a href="/solicitacoes-compra/minhas.php"
+                                class="flex items-center text-gray-700 px-4 py-3 hover:bg-gray-50 text-sm border-b">
+                                <i class="fas fa-bullseye mr-2 text-red-500"></i> Minhas Solicitações de Compra
                             </a>
                             <?php if (!empty($user['is_admin'])): ?>
                                 <a href="/admin/index.php"
@@ -314,11 +363,15 @@ $flashMessages = flash_get();
                     </a>
                 <?php endif; ?>
             </nav>
-            <button class="md:hidden text-gray-700" type="button" data-mobile-menu-button aria-label="Abrir menu">
-                <i class="fas fa-bars text-2xl"></i>
+            <button
+                class="md:hidden flex items-center gap-2 bg-amber-500 text-green-900 px-4 py-2 rounded-full font-semibold shadow-md border border-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2"
+                type="button" data-mobile-menu-button aria-label="Abrir menu" aria-expanded="false"
+                aria-controls="mobile-menu-panel">
+                <i class="fas fa-bars text-xl"></i>
+                <span class="text-sm tracking-wide uppercase">Menu</span>
             </button>
         </div>
-        <div class="md:hidden hidden border-t border-gray-100 bg-white" data-mobile-menu-panel>
+        <div id="mobile-menu-panel" class="md:hidden hidden border-t border-gray-100 bg-white" data-mobile-menu-panel>
             <div class="px-4 py-3 space-y-2">
                 <a href="<?= e($homeUrl); ?>"
                     class="block bg-amber-500 text-green-900 px-4 py-2 rounded-lg font-semibold text-sm shadow-sm text-center">
@@ -331,6 +384,10 @@ $flashMessages = flash_get();
                 <a href="<?= e($servicesPageUrl); ?>"
                     class="block bg-amber-500 text-green-900 px-4 py-2 rounded-lg font-semibold text-sm shadow-sm text-center">
                     <i class="fas fa-tools mr-2"></i> Serviços Automotivos
+                </a>
+                <a href="<?= e($purchaseRequestPageUrl); ?>"
+                    class="block bg-gradient-to-r from-red-600 to-orange-500 text-white px-4 py-2 rounded-lg font-semibold text-sm shadow-sm text-center">
+                    <i class="fas fa-bullseye mr-2"></i> Solicitação de compra
                 </a>
                 <a href="<?= e($advertisePageUrl); ?>"
                     class="block bg-amber-500 text-green-900 px-4 py-2 rounded-lg font-semibold text-sm shadow-sm text-center">
@@ -345,7 +402,9 @@ $flashMessages = flash_get();
                         <div class="mt-2 font-semibold text-sm">👤 <?= e($user['name']); ?></div>
                         <div class="text-xs text-green-200 mt-1 flex items-center gap-2 flex-wrap">
                             <span class="flex items-center gap-1">📧 <?= e($user['email']); ?></span>
-                            <span class="inline-flex items-center gap-1 bg-white bg-opacity-20 rounded px-2 py-0.5 font-semibold text-green-50">💰 <?= (int)$userCoinBalance; ?> moedas</span>
+                            <span
+                                class="inline-flex items-center gap-1 bg-white bg-opacity-20 rounded px-2 py-0.5 font-semibold text-green-50">💰
+                                <?= (int) $userCoinBalance; ?> moedas</span>
                         </div>
                         <?php if (!empty($user['is_admin'])): ?>
                             <div class="mt-1.5 inline-block bg-red-500 text-white px-1.5 py-0.5 rounded text-xs font-bold">
@@ -353,7 +412,8 @@ $flashMessages = flash_get();
                             </div>
                         <?php endif; ?>
                         <?php if (!empty($user['is_premium'])): ?>
-                            <div class="mt-1.5 inline-block bg-yellow-400 text-gray-900 px-2 py-0.5 rounded text-xs font-bold ml-1">
+                            <div
+                                class="mt-1.5 inline-block bg-yellow-400 text-gray-900 px-2 py-0.5 rounded text-xs font-bold ml-1">
                                 ⭐ PREMIUM
                             </div>
                         <?php endif; ?>
@@ -369,6 +429,10 @@ $flashMessages = flash_get();
                     <a href="/premium/minhas_buscas_salvas.php"
                         class="block bg-white border border-amber-200 text-green-900 px-4 py-2 rounded-lg font-semibold text-sm shadow-sm text-center mb-2">
                         <i class="fas fa-bookmark mr-2 text-amber-500"></i> Minhas Buscas Salvas
+                    </a>
+                    <a href="/solicitacoes-compra/minhas.php"
+                        class="block bg-white border border-amber-200 text-green-900 px-4 py-2 rounded-lg font-semibold text-sm shadow-sm text-center mb-2">
+                        <i class="fas fa-bullseye mr-2 text-red-500"></i> Minhas Solicitações de Compra
                     </a>
                     <?php if (!empty($user['is_admin'])): ?>
                         <a href="/admin/index.php"
