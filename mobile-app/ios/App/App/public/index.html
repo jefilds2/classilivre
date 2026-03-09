@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Classi Livre Mobile</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <section class="hero">
+        <h1>Classi Livre Mobile (MVP Android)</h1>
+        <p>
+          Base do APK com Capacitor iniciada. Este shell permite abrir o portal e validar a
+          pipeline inicial de conversao de foto/video para upload rapido.
+        </p>
+      </section>
+
+      <section class="grid">
+        <article class="card">
+          <h2>Portal</h2>
+          <div class="muted">Destino atual do app:</div>
+          <div id="appUrl"></div>
+          <div class="muted" style="margin-top: 8px">Build:</div>
+          <div id="buildTime"></div>
+          <div class="actions">
+            <button class="btn-primary" id="openSiteButton" type="button">Abrir Classi Livre</button>
+          </div>
+        </article>
+
+        <article class="card">
+          <h2>Media Optimizer (MVP)</h2>
+          <p class="muted">
+            Imagens sao redimensionadas e compactadas no dispositivo. Videos recebem analise de perfil
+            para proxima etapa de transcodificacao nativa.
+          </p>
+          <input id="mediaInput" type="file" accept="image/*,video/*" multiple />
+          <div class="actions">
+            <button class="btn-secondary" id="clearResults" type="button">Limpar resultados</button>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Tipo</th>
+                <th>Arquivo</th>
+                <th>Original</th>
+                <th>Otimizado</th>
+                <th>Ganho</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="resultRows"></tbody>
+          </table>
+          <div class="log" id="logs"></div>
+        </article>
+      </section>
+    </main>
+
+    <script src="./app-config.js"></script>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
+

@@ -1,1 +1,10 @@
-/mobile-app/
+/mobile-app/*
+!/mobile-app/ios/
+!/mobile-app/ios/**
+!/mobile-app/package.json
+!/mobile-app/package-lock.json
+!/mobile-app/capacitor.config.ts
+
+/mobile-app/android/
+/mobile-app/node_modules/
+/mobile-app/www/
